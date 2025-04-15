@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
 import AuthProvider from '@/app/providers/AuthProvider';
+import { Analytics } from '@vercel/analytics/react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
         <AuthProvider>
           {children}
           <Toaster />
+          <Analytics />
         </AuthProvider>
       </body>
     </html>
