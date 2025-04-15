@@ -34,7 +34,7 @@ export default function TaskModal({ task, isOpen, onClose }: TaskModalProps) {
     defaultValues: {
       title: task.title,
       description: task.description || '',
-      priority: task.priority,
+      priority: task.priority as 'LOW' | 'MEDIUM' | 'HIGH',
       dueDate: task.dueDate ? new Date(task.dueDate).toISOString().split('T')[0] : '',
     },
   });
