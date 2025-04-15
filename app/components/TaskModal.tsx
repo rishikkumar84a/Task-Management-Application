@@ -14,10 +14,12 @@ interface TaskModalProps {
   onClose: () => void;
 }
 
+type Priority = 'LOW' | 'MEDIUM' | 'HIGH';
+
 type TaskFormData = {
   title: string;
   description: string;
-  priority: 'LOW' | 'MEDIUM' | 'HIGH';
+  priority: Priority;
   dueDate: string;
 };
 
@@ -25,6 +27,11 @@ export default function TaskModal({ task, isOpen, onClose }: TaskModalProps) {
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  
+  const taskPriority: Priority = 
+    task.priority === 'LOW' || task.priority === 'MEDIUM' || task.priority === 'HIGH' 
+      ? task.priority 
+      : 'MEDIUM';
   
   const {
     register,
@@ -34,7 +41,7 @@ export default function TaskModal({ task, isOpen, onClose }: TaskModalProps) {
     defaultValues: {
       title: task.title,
       description: task.description || '',
-      priority: task.priority as 'LOW' | 'MEDIUM' | 'HIGH',
+      priority: taskPriority,
       dueDate: task.dueDate ? new Date(task.dueDate).toISOString().split('T')[0] : '',
     },
   });
